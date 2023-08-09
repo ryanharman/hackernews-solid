@@ -1,6 +1,5 @@
 import { For, Show } from 'solid-js';
-import { useRouteData, useSearchParams } from 'solid-start';
-import { createServerData$ } from 'solid-start/server';
+import { createRouteData, useRouteData, useSearchParams } from "solid-start";
 import { Summary } from '~/components/Summary';
 
 export type NewsResponse = {
@@ -20,7 +19,7 @@ export type NewsResponse = {
 export function routeData() {
   const [params] = useSearchParams();
 
-  return createServerData$(
+  return createRouteData(
     async (page) => {
       const items: NewsResponse[] = await fetch(
         `https://node-hnapi.herokuapp.com/news?page=${page}`
