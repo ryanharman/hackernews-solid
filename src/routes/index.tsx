@@ -31,7 +31,7 @@ export function routeData() {
 }
 
 export default function Home() {
-  const data = useRouteData();
+  const data = useRouteData<typeof routeData>();
   const [params, setParams] = useSearchParams();
 
   function prevPage() {
@@ -45,9 +45,7 @@ export default function Home() {
 
   return (
     <Show when={data()} fallback={<div>loading...</div>}>
-      <For each={data() as NewsResponse[]}>
-        {(item) => <Summary item={item} />}
-      </For>
+      <For each={data()}>{(item) => <Summary item={item} />}</For>
       <div class="flex justify-between mt-4">
         <button class="hover:underline" onclick={prevPage}>
           Prev page
