@@ -9,7 +9,12 @@ type Props = {
 
 export function Summary(props: Props) {
   const showCommentLink = createMemo(() => !props.item.isPost);
-  const showContent = createMemo(() => "content" in props.item);
+  const showContent = createMemo(() => {
+    if (typeof props.item === "object" && "content" in props.item) {
+      return true;
+    }
+    return false;
+  });
 
   return (
     <div>
@@ -33,7 +38,6 @@ export function Summary(props: Props) {
       </p>
       <Show when={showContent()}>
         <div class="text-sm text-zinc-500">
-          {/* TODO: Fix */}
           <div innerHTML={(props.item as PostResponse).content} />
         </div>
       </Show>
