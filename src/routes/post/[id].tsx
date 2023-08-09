@@ -40,7 +40,7 @@ export function routeData() {
 }
 
 export default function Home() {
-  const data = useRouteData();
+  const data = useRouteData<typeof routeData>();
 
   return (
     <Show when={data()} fallback={<div>loading...</div>}>
